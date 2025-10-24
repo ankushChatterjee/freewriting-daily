@@ -1,0 +1,16 @@
+# Backend Server Configuration
+# This file configures the freewriting-daily backend API server
+
+# Server configuration
+port = 3000
+
+# Database configuration
+database_path = "./freewriting.db"
+migrations_folder = "./migrations"
+
+# JWT configuration
+jwt_expiry = "720h"  # 30 days (format: hours=h, minutes=m, seconds=s)
+
+# Application configuration
+minimum_words = 42  # Minimum words to count towards streak
+

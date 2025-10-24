@@ -1,0 +1,113 @@
+@import url('https://fonts.googleapis.com/css2?family=Cormorant:wght@300;400;500;600;700&family=Crete+Round:ital@0;1&display=swap');
+
+@import "tailwindcss";
+
+@theme {
+  --font-title: 'Cormorant', serif;
+  --font-body: 'Crete Round', serif;
+  
+  --color-beige: #F5E6D3;
+  --color-beige-dark: #E6D7C3;
+  --color-charcoal: #2D3142;
+  --color-charcoal-light: #4F5569;
+}
+
+@layer base {
+  body {
+    font-family: var(--font-body);
+    color: var(--color-charcoal);
+    background-color: #fafaf9;
+  }
+  
+  h1, h2, h3, h4, h5, h6 {
+    font-family: var(--font-title);
+  }
+  
+  ::selection {
+    background-color: #A0826D;
+    color: #ffffff;
+  }
+  
+  ::-moz-selection {
+    background-color: #A0826D;
+    color: #ffffff;
+  }
+}
+
+@layer components {
+  .newspaper-title {
+    font-family: var(--font-title);
+    font-weight: 700;
+    font-size: 3.75rem;
+    letter-spacing: -0.025em;
+    color: var(--color-charcoal);
+  }
+  
+  @media (min-width: 768px) {
+    .newspaper-title {
+      font-size: 4.5rem;
+    }
+  }
+  
+  .newspaper-date {
+    font-family: var(--font-title);
+    font-size: 1.125rem;
+    letter-spacing: 0.025em;
+    color: color-mix(in srgb, var(--color-charcoal) 70%, transparent);
+  }
+  
+  @media (min-width: 768px) {
+    .newspaper-date {
+      font-size: 1.25rem;
+    }
+  }
+  
+  .input-underline {
+    background-color: transparent;
+    border: 0;
+    border-bottom: 2px solid color-mix(in srgb, var(--color-charcoal) 30%, transparent);
+    padding: 0.5rem 0;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    outline: none;
+    transition: border-color 150ms;
+  }
+  
+  .input-underline:focus {
+    border-color: var(--color-charcoal);
+  }
+  
+  .btn-primary {
+    background-color: var(--color-charcoal);
+    color: #fafaf9;
+    padding: 0.75rem 2rem;
+    font-family: var(--font-body);
+    font-size: 1.125rem;
+    transition: all 150ms;
+    cursor: pointer;
+  }
+  
+  .btn-primary:hover:not(:disabled) {
+    background-color: color-mix(in srgb, var(--color-charcoal) 90%, transparent);
+    box-shadow: 0 10px 15px -3px rgb(0 0 0 / 0.1);
+  }
+  
+  .btn-primary:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+  }
+  
+  .btn-secondary {
+    background-color: transparent;
+    color: var(--color-charcoal);
+    padding: 0.5rem 1rem;
+    font-family: var(--font-body);
+    font-size: 0.95rem;
+    transition: all 150ms;
+    cursor: pointer;
+  }
+  
+  .btn-secondary:hover {
+    background-color: color-mix(in srgb, var(--color-charcoal) 5%, transparent);
+  }
+}

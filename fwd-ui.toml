@@ -1,0 +1,9 @@
+# Frontend UI Configuration
+# This file configures the freewriting-daily frontend application
+
+# API configuration
+api_url = "http://192.168.0.102:3000"  # Backend API URL
+
+# Application configuration
+minimum_words = 42  # Minimum words to count towards streak (should match backend)
+
