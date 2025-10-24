@@ -48,7 +48,7 @@ export function HistoryModal({ isOpen, onClose }) {
         <div
           className="fixed inset-0 z-40 backdrop-blur-sm transition-opacity duration-300"
           style={{ 
-            backgroundColor: 'rgba(45, 49, 66, 0.2)',
+            backgroundColor: 'rgba(0, 0, 0, 0.2)',
             opacity: isOpen ? 1 : 0
           }}
           onClick={handleClose}
@@ -57,30 +57,31 @@ export function HistoryModal({ isOpen, onClose }) {
 
       {/* Sidebar */}
       <div 
-        className="fixed top-0 left-0 h-full z-50 bg-white shadow-2xl overflow-y-auto transition-transform duration-300 ease-in-out"
+        className="fixed top-0 left-0 h-full z-50 shadow-2xl overflow-y-auto transition-transform duration-300 ease-in-out"
         style={{ 
           width: '90vw',
           maxWidth: '500px',
           transform: isOpen ? 'translateX(0)' : 'translateX(-100%)',
-          borderRight: '1px solid #e5e7eb'
+          borderRight: '1px solid var(--border-color)',
+          backgroundColor: 'var(--bg-secondary)'
         }}
       >
         <div className="p-6 md:p-8">
           <div className="flex items-center justify-between mb-8">
-            <h2 className="text-3xl md:text-4xl" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+            <h2 className="text-3xl md:text-4xl" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
               History
             </h2>
             <button
               onClick={handleClose}
               className="text-4xl leading-none hover:opacity-100 transition-opacity w-10 h-10 flex items-center justify-center"
-              style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)', opacity: 0.5, cursor: 'pointer' }}
+              style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)', opacity: 0.5, cursor: 'pointer' }}
             >
               ×
             </button>
           </div>
 
           {loading ? (
-            <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+            <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
               Loading history...
             </div>
           ) : selectedDoc ? (
@@ -89,21 +90,21 @@ export function HistoryModal({ isOpen, onClose }) {
               <button
                 onClick={() => setSelectedDoc(null)}
                 className="mb-4 text-sm underline hover:opacity-100 transition-opacity"
-                style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)', opacity: 0.7, cursor: 'pointer' }}
+                style={{ fontFamily: 'var(--font-body)', color: 'var(--text-secondary)', cursor: 'pointer' }}
               >
                 ← Back to list
               </button>
-              <div className="mb-4 pb-4 border-b border-gray-200">
-                <div className="text-xl mb-1" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+              <div className="mb-4 pb-4 border-b" style={{ borderColor: 'var(--border-color)' }}>
+                <div className="text-xl mb-1" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                   {format(new Date(selectedDoc.date), 'EEEE, MMM d, yyyy')}
                 </div>
-                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                   {selectedDoc.word_count} words
                 </div>
               </div>
               <div 
                 className="whitespace-pre-wrap text-base leading-relaxed"
-                style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}
+                style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}
               >
                 {selectedDoc.content}
               </div>
@@ -118,18 +119,18 @@ export function HistoryModal({ isOpen, onClose }) {
                       <button
                         key={doc.id}
                         onClick={() => setSelectedDoc(doc)}
-                        className="w-full text-left p-3 border border-gray-200 hover:bg-gray-50 transition-colors"
-                        style={{ cursor: 'pointer' }}
+                        className="w-full text-left p-3 border transition-colors"
+                        style={{ cursor: 'pointer', borderColor: 'var(--border-color)' }}
                       >
                         <div className="flex justify-between items-baseline mb-1">
-                          <div className="font-semibold text-lg" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+                          <div className="font-semibold text-lg" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                             {format(new Date(doc.date), 'EEE, MMM d')}
                           </div>
-                          <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                          <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                             {doc.word_count} words
                           </div>
                         </div>
-                        <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                        <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                           {getPreview(doc.content)}
                         </div>
                       </button>
@@ -137,7 +138,7 @@ export function HistoryModal({ isOpen, onClose }) {
                   </div>
 
                   {/* Pagination */}
-                  <div className="flex justify-between items-center pt-4 border-t border-gray-200">
+                  <div className="flex justify-between items-center pt-4 border-t" style={{ borderColor: 'var(--border-color)' }}>
                     <button
                       onClick={() => setPage(p => Math.max(1, p - 1))}
                       disabled={page === 1}
@@ -145,7 +146,7 @@ export function HistoryModal({ isOpen, onClose }) {
                     >
                       Previous
                     </button>
-                    <span className="text-sm" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                    <span className="text-sm" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                       Page {page}
                     </span>
                     <button
@@ -158,7 +159,7 @@ export function HistoryModal({ isOpen, onClose }) {
                   </div>
                 </>
               ) : (
-                <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                   No entries yet. Start writing!
                 </div>
               )}

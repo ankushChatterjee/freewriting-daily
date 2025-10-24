@@ -25,7 +25,7 @@ export function StreakBar({ refreshTrigger }) {
     return (
       <div className="flex gap-2 justify-center">
         {[...Array(7)].map((_, i) => (
-          <div key={i} className="w-8 h-8 bg-gray-200 animate-pulse" />
+          <div key={i} className="w-8 h-8 animate-pulse" style={{ backgroundColor: 'var(--border-color)' }} />
         ))}
       </div>
     );
@@ -55,7 +55,7 @@ export function StreakBar({ refreshTrigger }) {
           title={day.displayDate}
           className="w-8 h-8 transition-all"
           style={{
-            backgroundColor: day.hasWriting ? 'var(--color-beige)' : '#e5e5e5',
+            backgroundColor: day.hasWriting ? 'var(--accent-selection)' : 'var(--border-color)',
           }}
         />
       ))}

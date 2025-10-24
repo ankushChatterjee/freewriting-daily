@@ -67,24 +67,24 @@ export function StatsModal({ isOpen, onClose }) {
       {/* Backdrop */}
       <div
         className="absolute inset-0 backdrop-blur-sm"
-        style={{ backgroundColor: 'rgba(45, 49, 66, 0.2)' }}
+        style={{ backgroundColor: 'rgba(0, 0, 0, 0.2)' }}
         onClick={onClose}
       />
 
       {/* Modal */}
-      <div className="relative bg-white w-full max-w-2xl p-8 md:p-12 shadow-2xl max-h-[90vh] overflow-y-auto">
+      <div className="relative w-full max-w-2xl p-8 md:p-12 shadow-2xl max-h-[90vh] overflow-y-auto" style={{ backgroundColor: 'var(--bg-secondary)' }}>
         <button
           onClick={onClose}
           className="absolute top-2 right-2 md:top-4 md:right-4 text-5xl leading-none hover:opacity-100 transition-opacity w-12 h-12 flex items-center justify-center"
-          style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)', opacity: 0.5, cursor: 'pointer' }}
+          style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)', opacity: 0.5, cursor: 'pointer' }}
         >
           ×
         </button>
 
-        <h2 className="text-4xl mb-8" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>Your Statistics</h2>
+        <h2 className="text-4xl mb-8" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>Your Statistics</h2>
 
         {loading ? (
-          <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+          <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
             Loading statistics...
           </div>
         ) : (
@@ -92,26 +92,26 @@ export function StatsModal({ isOpen, onClose }) {
             {/* Stats Grid */}
             <div className="grid grid-cols-3 gap-6 mb-12">
               <div className="text-center">
-                <div className="text-4xl mb-2" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+                <div className="text-4xl mb-2" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                   {stats?.current_streak || 0}
                 </div>
-                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                   Current Streak
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-2" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+                <div className="text-4xl mb-2" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                   {stats?.total_days_written || 0}
                 </div>
-                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                   Total Days
                 </div>
               </div>
               <div className="text-center">
-                <div className="text-4xl mb-2" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+                <div className="text-4xl mb-2" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                   {calculateLongestStreak()}
                 </div>
-                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+                <div className="text-sm opacity-70" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                   Longest Streak
                 </div>
               </div>
@@ -120,41 +120,42 @@ export function StatsModal({ isOpen, onClose }) {
             {/* Chart */}
             {chartData.length > 0 ? (
               <div>
-                <h3 className="text-2xl mb-4" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+                <h3 className="text-2xl mb-4" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                   Words Per Day (Last 30 Days)
                 </h3>
                 <ResponsiveContainer width="100%" height={300}>
                   <LineChart data={chartData}>
                     <XAxis
                       dataKey="date"
-                      stroke="#2D3142"
-                      style={{ fontSize: '12px', fontFamily: 'Crete Round' }}
+                      stroke="currentColor"
+                      style={{ fontSize: '12px', fontFamily: 'Crete Round', color: 'var(--text-primary)' }}
                     />
                     <YAxis
-                      stroke="#2D3142"
-                      style={{ fontSize: '12px', fontFamily: 'Crete Round' }}
+                      stroke="currentColor"
+                      style={{ fontSize: '12px', fontFamily: 'Crete Round', color: 'var(--text-primary)' }}
                     />
                     <Tooltip
                       contentStyle={{
-                        backgroundColor: 'white',
+                        backgroundColor: 'var(--bg-secondary)',
                         border: 'none',
                         boxShadow: '0 4px 12px rgba(0,0,0,0.1)',
                         fontFamily: 'Crete Round',
+                        color: 'var(--text-primary)',
                       }}
                     />
                     <Line
                       type="monotone"
                       dataKey="words"
-                      stroke="#F5E6D3"
+                      stroke="var(--accent-selection)"
                       strokeWidth={3}
-                      dot={{ fill: '#F5E6D3', strokeWidth: 2, r: 4 }}
+                      dot={{ fill: 'var(--accent-selection)', strokeWidth: 2, r: 4 }}
                       activeDot={{ r: 6 }}
                     />
                   </LineChart>
                 </ResponsiveContainer>
               </div>
             ) : (
-              <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)' }}>
+              <div className="text-center py-12 opacity-50" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)' }}>
                 No writing data yet. Start your first entry!
               </div>
             )}

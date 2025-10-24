@@ -4,6 +4,7 @@ import { useAuth } from '../hooks/useAuth';
 import { StreakBar } from './StreakBar';
 import { StatsModal } from './StatsModal';
 import { HistoryModal } from './HistoryModal';
+import { ThemeSwitcher } from './ThemeSwitcher';
 import api from '../services/api';
 
 export function FreewritingPage() {
@@ -92,7 +93,7 @@ export function FreewritingPage() {
   if (loading) {
     return (
       <div className="min-h-screen flex items-center justify-center">
-        <div className="text-xl opacity-50" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>Loading...</div>
+        <div className="text-xl opacity-50" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>Loading...</div>
       </div>
     );
   }
@@ -100,14 +101,14 @@ export function FreewritingPage() {
   return (
     <div className="h-screen flex flex-col">
       {/* Top Bar - Fixed */}
-      <header className="flex-shrink-0 px-4 py-4 md:py-6 border-b border-gray-200">
+      <header className="flex-shrink-0 px-4 py-4 md:py-6 border-b" style={{ borderColor: 'var(--border-color)' }}>
         <div className="max-w-6xl mx-auto">
           <div className="flex items-center justify-between mb-2">
             <div className="flex-1">
-              <h1 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+              <h1 className="text-3xl md:text-4xl font-bold" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
                 The Free Writing Daily
               </h1>
-              <p className="text-sm md:text-base" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)', opacity: 0.7 }}>
+              <p className="text-sm md:text-base" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-secondary)' }}>
                 {format(today, 'EEEE, MMMM d, yyyy')}
               </p>
             </div>
@@ -122,7 +123,7 @@ export function FreewritingPage() {
                 >
                   History
                 </button>
-                <span style={{ color: 'var(--color-charcoal)', opacity: 0.3 }}>|</span>
+                <span style={{ color: 'var(--text-tertiary)' }}>|</span>
                 <button
                   onClick={() => setIsStatsOpen(true)}
                   className="btn-secondary"
@@ -130,22 +131,24 @@ export function FreewritingPage() {
                 >
                   Statistics
                 </button>
-                <span style={{ color: 'var(--color-charcoal)', opacity: 0.3 }}>|</span>
+                <span style={{ color: 'var(--text-tertiary)' }}>|</span>
                 <button
                   onClick={logout}
                   className="btn-secondary transition-colors hover:opacity-100"
-                  style={{ paddingLeft: '0.5rem', opacity: 0.5 }}
+                  style={{ paddingLeft: '0.5rem', paddingRight: '0.5rem', opacity: 0.5 }}
                 >
                   Logout
                 </button>
+                <span style={{ color: 'var(--text-tertiary)' }}>|</span>
               </div>
               <button
                 onClick={logout}
                 className="md:hidden text-sm transition-colors hover:opacity-100"
-                style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)', opacity: 0.7, cursor: 'pointer' }}
+                style={{ fontFamily: 'var(--font-body)', color: 'var(--text-primary)', opacity: 0.7, cursor: 'pointer' }}
               >
                 Logout
               </button>
+              <ThemeSwitcher />
             </div>
           </div>
           
@@ -177,14 +180,14 @@ export function FreewritingPage() {
             className="w-full h-full bg-transparent border-0 focus:outline-none text-lg md:text-xl resize-none"
             style={{ 
               fontFamily: 'var(--font-body)', 
-              color: 'var(--color-charcoal)',
+              color: 'var(--text-primary)',
               lineHeight: '1.8' 
             }}
           />
         </div>
       </div>
 
-      <footer className="flex-shrink-0 px-4 py-4 border-t border-gray-200 bg-white/80 backdrop-blur-sm">
+      <footer className="flex-shrink-0 px-4 py-4 border-t backdrop-blur-sm" style={{ borderColor: 'var(--border-color)', backgroundColor: 'var(--footer-bg)' }}>
         <div className="max-w-6xl mx-auto flex flex-col md:flex-row justify-between md:items-center gap-3">
           <div className="flex items-center gap-4 self-center md:self-auto">
             <div className="flex items-center gap-3">
@@ -192,7 +195,7 @@ export function FreewritingPage() {
                 className="text-4xl leading-none inline-block text-right"
                 style={{ 
                   fontFamily: 'var(--font-body)',
-                  color: wordCount >= minimumWords ? 'var(--color-charcoal)' : '#d97706',
+                  color: wordCount >= minimumWords ? 'var(--text-primary)' : 'var(--accent-warning)',
                   opacity: 0.45,
                   fontWeight: 400,
                   letterSpacing: '-0.02em',
@@ -206,8 +209,7 @@ export function FreewritingPage() {
                   className="text-sm leading-none"
                   style={{ 
                     fontFamily: 'var(--font-body)', 
-                    color: 'var(--color-charcoal)', 
-                    opacity: 0.5
+                    color: 'var(--text-tertiary)'
                   }}
                 >
                   {minimumWords}+ for streak
@@ -221,7 +223,7 @@ export function FreewritingPage() {
               </span>
             )}
             {saveWarning && (
-              <span className="text-sm" style={{ fontFamily: 'var(--font-body)', color: '#d97706' }}>
+              <span className="text-sm" style={{ fontFamily: 'var(--font-body)', color: 'var(--accent-warning)' }}>
                 {saveWarning}
               </span>
             )}
@@ -237,10 +239,10 @@ export function FreewritingPage() {
             <div 
               className="w-2 h-2 rounded-full transition-colors absolute"
               style={{ 
-                backgroundColor: hasUnsavedChanges ? '#eab308' : '#22c55e',
+                backgroundColor: hasUnsavedChanges ? '#eab308' : 'var(--accent-success)',
                 top: '-4px',
                 left: '-4px',
-                boxShadow: '0 0 0 2px white'
+                boxShadow: '0 0 0 2px var(--bg-primary)'
               }}
               title={hasUnsavedChanges ? 'Unsaved changes' : 'All changes saved'}
             />

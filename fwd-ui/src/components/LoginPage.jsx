@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../hooks/useAuth';
+import { ThemeSwitcher } from './ThemeSwitcher';
 import { format } from 'date-fns';
 
 export function LoginPage() {
@@ -34,7 +35,12 @@ export function LoginPage() {
   const today = new Date();
 
   return (
-    <div className="min-h-screen flex items-center justify-center px-4 py-12">
+    <div className="min-h-screen flex items-center justify-center px-4 py-12 relative">
+      {/* Theme Switcher - Top Right Corner */}
+      <div className="absolute top-4 right-4">
+        <ThemeSwitcher />
+      </div>
+      
       <div className="w-full max-w-md">
         {/* Newspaper Title */}
         <div className="text-center mb-12">
@@ -43,14 +49,14 @@ export function LoginPage() {
         </div>
 
         {/* Login Form */}
-        <div className="bg-white/50 backdrop-blur-sm px-8 py-12">
-          <h2 className="text-3xl text-center mb-8" style={{ fontFamily: 'var(--font-title)', color: 'var(--color-charcoal)' }}>
+        <div className="backdrop-blur-sm px-8 py-12" style={{ backgroundColor: 'var(--bg-secondary-alpha)' }}>
+          <h2 className="text-3xl text-center mb-8" style={{ fontFamily: 'var(--font-title)', color: 'var(--text-primary)' }}>
             {isSignup ? 'Create Account' : 'Welcome Back'}
           </h2>
 
           <form onSubmit={handleSubmit} className="space-y-6">
             <div>
-              <label htmlFor="username" className="block text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)', opacity: 0.7 }}>
+              <label htmlFor="username" className="block text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-secondary)' }}>
                 Username
               </label>
               <input
@@ -67,7 +73,7 @@ export function LoginPage() {
             </div>
 
             <div>
-              <label htmlFor="password" className="block text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)', opacity: 0.7 }}>
+              <label htmlFor="password" className="block text-sm mb-2" style={{ fontFamily: 'var(--font-body)', color: 'var(--text-secondary)' }}>
                 Password
               </label>
               <input
@@ -103,7 +109,7 @@ export function LoginPage() {
                 setError('');
               }}
               className="text-sm transition-colors underline hover:opacity-100"
-              style={{ fontFamily: 'var(--font-body)', color: 'var(--color-charcoal)', opacity: 0.7, cursor: 'pointer' }}
+              style={{ fontFamily: 'var(--font-body)', color: 'var(--text-secondary)', cursor: 'pointer' }}
             >
               {isSignup ? 'Already have an account? Login' : 'Need an account? Sign up'}
             </button>
