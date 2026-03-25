@@ -28,8 +28,9 @@ export default function configPlugin() {
         console.warn(`Warning: Config file not found at ${configPath}. Using defaults.`);
       }
       
-      // Extract frontend-relevant values with defaults
-      const apiUrl = tomlConfig.api_url || 'http://localhost:3000';
+      // Extract frontend-relevant values with defaults (env wins for local overrides, e.g. devlocal.sh)
+      const apiUrl =
+        process.env.VITE_API_URL || tomlConfig.api_url || 'http://localhost:3000';
       const minimumWords = tomlConfig.minimum_words || 42;
       
       // Inject as environment variables
